@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdb1oy1y5m8h"]
+[gd_scene load_steps=10 format=3 uid="uid://bdb1oy1y5m8h"]
 
+[ext_resource type="Script" path="res://enemy/Enemy.cs" id="1_b68dv"]
 [ext_resource type="Texture2D" uid="uid://ces2jl461qj4b" path="res://enemy/eagle-attack.png" id="1_rfvra"]
+[ext_resource type="PackedScene" uid="uid://bcnkftxgfh0de" path="res://health_component/health_component.tscn" id="2_jnhwh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ieq6j"]
 size = Vector2(29, 27.5)
@@ -41,10 +43,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" type="StaticBody2D" groups=["enemies"]]
+[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_b68dv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ieq6j")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_v203i")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_jnhwh")]

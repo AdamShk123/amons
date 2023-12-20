@@ -7,14 +7,14 @@ public partial class Bullet : Area2D
 
 	public Vector2 Dir { get; set; }
 
-	private Timer TimerNode;
+	private Timer _timerNode;
 
 	public ulong ShooterId { get; set; }
 
 	public override void _Ready()
 	{
-		TimerNode = GetNode<Timer>("Timer");
-		TimerNode.Start();
+		_timerNode = GetNode<Timer>("Timer");
+		_timerNode.Start();
 	}
 	
 	public override void _Process(double delta)
@@ -31,9 +31,9 @@ public partial class Bullet : Area2D
 			return;
 		}
 
-		if (body.IsInGroup("enemies"))
+		if (body.IsInGroup("enemies") || body is Enemy)
 		{
-			body.QueueFree();
+			((Enemy)body).Damage(50);
 		}
 		
 		QueueFree();

@@ -7,23 +7,32 @@ public partial class Player : CharacterBody2D
 	private const float MaxX = 200.0f;
 	private const float Accel = 60.0f;
 	
-	private float Gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+	private float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 	
 	[Signal]
 	public delegate void PositionChangedEventHandler(Vector2 pos);
 
-	private PackedScene BulletScene;
+	private PackedScene _bulletScene;
+
+	private HealthComponent _healthComponent;
+
+	private HitboxComponent _hitboxComponent;
 
 	public override void _Ready()
 	{
-		BulletScene = GD.Load<PackedScene>("res://bullet/bullet.tscn");
+		_bulletScene = GD.Load<PackedScene>("res://bullet/bullet.tscn");
+		
+		_healthComponent = GetNode<HealthComponent>("HealthComponent");
+		_healthComponent.Health = 100;
+
+		_hitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		if (Input.IsActionJustPressed("shoot"))
 		{
-			Bullet bulletNode = BulletScene.Instantiate<Bullet>();
+			Bullet bulletNode = _bulletScene.Instantiate<Bullet>();
 			bulletNode.Dir = GetLocalMousePosition().Normalized();
 			bulletNode.Position = Position;
 			bulletNode.ShooterId = GetInstanceId();
@@ -34,7 +43,7 @@ public partial class Player : CharacterBody2D
 
 		if (!IsOnFloor())
 		{
-			float change = (float)(Gravity * delta);
+			float change = (float)(_gravity * delta);
 			velocity.Y = Mathf.MoveToward(Velocity.Y, MaxY, change);
 		}
 
@@ -42,14 +51,8 @@ public partial class Player : CharacterBody2D
 			velocity.Y = -MaxY;
 		
 		float dir = Input.GetAxis("left", "right");
-		if(dir != 0)
-		{
-			velocity.X = Mathf.MoveToward(Velocity.X, MaxX * dir, Accel);
-		}
-		else
-		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Accel);
-		}
+		
+		velocity.X = dir != 0 ? Mathf.MoveToward(Velocity.X, MaxX * dir, Accel) : Mathf.MoveToward(Velocity.X, 0, Accel);
 
 		Vector2 oldPos = Position;
 		Velocity = velocity;

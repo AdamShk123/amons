@@ -2,16 +2,16 @@ using Godot;
 
 public partial class Level : Node2D
 {
-	private Player PlayerNode;
+	private Player _playerNode;
 
-	private Camera CameraNode;
+	private Camera _cameraNode;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		PlayerNode = GetNode<Player>("Player");
-		CameraNode = GetNode<Camera>("Camera");
-		PlayerNode.PositionChanged += CameraNode.OnPlayerPositionChanged;
+		_playerNode = GetNode<Player>("Player");
+		_cameraNode = GetNode<Camera>("Camera");
+		_playerNode.PositionChanged += _cameraNode.OnPlayerPositionChanged;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
