@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdb1oy1y5m8h"]
+
+[ext_resource type="Texture2D" uid="uid://ces2jl461qj4b" path="res://enemy/eagle-attack.png" id="1_rfvra"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ieq6j"]
+size = Vector2(29, 27.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0v1ny"]
+atlas = ExtResource("1_rfvra")
+region = Rect2(0, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hi0nc"]
+atlas = ExtResource("1_rfvra")
+region = Rect2(40, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0rhv"]
+atlas = ExtResource("1_rfvra")
+region = Rect2(80, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghewk"]
+atlas = ExtResource("1_rfvra")
+region = Rect2(120, 0, 40, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v203i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0v1ny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hi0nc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0rhv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghewk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Enemy" type="StaticBody2D" groups=["enemies"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ieq6j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_v203i")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ces2jl461qj4b"
-path="res://.godot/imported/eagle-attack.png-58e55876ccdbec3a9709ff82d042f435.ctex"
+uid="uid://c3u7fk37a87kn"
+path="res://.godot/imported/cherry.png-c20f445ce5c0d70de5c48d652772559f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/eagle-attack.png"
-dest_files=["res://.godot/imported/eagle-attack.png-58e55876ccdbec3a9709ff82d042f435.ctex"]
+source_file="res://bullet/cherry.png"
+dest_files=["res://.godot/imported/cherry.png-c20f445ce5c0d70de5c48d652772559f.ctex"]
 
 [params]
 

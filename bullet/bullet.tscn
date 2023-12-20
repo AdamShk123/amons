@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://l2h6aw4os4ec"]
+
+[ext_resource type="Texture2D" uid="uid://c3u7fk37a87kn" path="res://bullet/cherry.png" id="1_bhx22"]
+[ext_resource type="Script" path="res://bullet/Bullet.cs" id="1_pnyr0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hhjau"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ra425"]
+atlas = ExtResource("1_bhx22")
+region = Rect2(0, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7pws"]
+atlas = ExtResource("1_bhx22")
+region = Rect2(21, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dv0v"]
+atlas = ExtResource("1_bhx22")
+region = Rect2(42, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kipte"]
+atlas = ExtResource("1_bhx22")
+region = Rect2(63, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jo7jt"]
+atlas = ExtResource("1_bhx22")
+region = Rect2(84, 0, 21, 21)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ou6fq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ra425")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7pws")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dv0v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kipte")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jo7jt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 4
+collision_mask = 11
+script = ExtResource("1_pnyr0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hhjau")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ou6fq")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]
