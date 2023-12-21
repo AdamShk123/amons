@@ -1,7 +1,9 @@
+using System;
+using AMatterofNationalSecurity.interfaces;
 using Godot;
 using Vector2 = Godot.Vector2;
 	
-public partial class Player : CharacterBody2D
+public partial class Player : CharacterBody2D, IDamage
 { 
 	private const float MaxY = 300.0f;
 	private const float MaxX = 200.0f;
@@ -17,29 +19,35 @@ public partial class Player : CharacterBody2D
 	private HealthComponent _healthComponent;
 
 	private HitboxComponent _hitboxComponent;
+	
+	private AnimatedSprite2D _animatedSprite2D;
 
 	public override void _Ready()
 	{
 		_bulletScene = GD.Load<PackedScene>("res://bullet/bullet.tscn");
 		
 		_healthComponent = GetNode<HealthComponent>("HealthComponent");
-		_healthComponent.Health = 100;
+		_healthComponent.Health = 100.0f;
 
 		_hitboxComponent = GetNode<HitboxComponent>("HitboxComponent");
+		
+		_animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		_animatedSprite2D.Play();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		if (Input.IsActionJustPressed("shoot"))
 		{
-			Bullet bulletNode = _bulletScene.Instantiate<Bullet>();
+			var bulletNode = _bulletScene.Instantiate<Bullet>();
 			bulletNode.Dir = GetLocalMousePosition().Normalized();
+			bulletNode.Dmg = 50.0f;
 			bulletNode.Position = Position;
-			bulletNode.ShooterId = GetInstanceId();
+			bulletNode.SetCollisionMaskValue((int)AMatterofNationalSecurity.CollisionLayer.Enemy, true);
 			GetParent().AddChild(bulletNode);
 		}
 		
-		Vector2 velocity = Velocity;
+		var velocity = Velocity;
 
 		if (!IsOnFloor())
 		{
@@ -50,16 +58,21 @@ public partial class Player : CharacterBody2D
 		if (Input.IsActionJustPressed("jump") && IsOnFloor())
 			velocity.Y = -MaxY;
 		
-		float dir = Input.GetAxis("left", "right");
+		var dir = Input.GetAxis("left", "right");
 		
 		velocity.X = dir != 0 ? Mathf.MoveToward(Velocity.X, MaxX * dir, Accel) : Mathf.MoveToward(Velocity.X, 0, Accel);
 
-		Vector2 oldPos = Position;
+		var oldPos = Position;
 		Velocity = velocity;
 		MoveAndSlide();
 		if (!oldPos.IsEqualApprox(Position))
 		{
 			EmitSignal(SignalName.PositionChanged, Position);
 		}
+	}
+
+	public void Damage(float dmg, Area2D area)
+	{
+		throw new NotImplementedException();
 	}
 }

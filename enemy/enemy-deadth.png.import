@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://gwa0y4yc34b7"
-path="res://.godot/imported/enemy-deadth.png-08868267a97bc7c81d2f1121600168f0.ctex"
+path="res://.godot/imported/enemy-deadth.png-66baf99867986d2a0b484ca073312b7a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/enemy-deadth.png"
-dest_files=["res://.godot/imported/enemy-deadth.png-08868267a97bc7c81d2f1121600168f0.ctex"]
+source_file="res://enemy/enemy-deadth.png"
+dest_files=["res://.godot/imported/enemy-deadth.png-66baf99867986d2a0b484ca073312b7a.ctex"]
 
 [params]
 

@@ -50,17 +50,21 @@ animations = [{
 
 [node name="Bullet" type="Area2D"]
 collision_layer = 4
-collision_mask = 11
+collision_mask = 2
 script = ExtResource("1_pnyr0")
+_speed = 500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.35, 0.35)
 shape = SubResource("RectangleShape2D_hhjau")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.35, 0.35)
 sprite_frames = SubResource("SpriteFrames_ou6fq")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
 [connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

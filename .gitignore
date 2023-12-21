@@ -2,3 +2,4 @@
 .godot/
 .idea/
 *.DotSettings.user
+.attach_pid*
