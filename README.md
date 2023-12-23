@@ -1,4 +1,4 @@
-# A Matter of National Security
+﻿# A Matter of National Security
 
 - 2D Platformer Shooter
 
@@ -12,5 +12,19 @@ Minimum Viable Product
 
 Movement options will be walking, crouching, running, and jumping
 
-Weapon choices will be a bat (for non-lethal takedown), knife, gun, and other utilities, such as flash grenades
+Combat weapon choices will be fists, a knife, a bat, and a handgun
+
+Enemy movement options will be the same
+
+Combat options will be the same
+
+Enemies will have a sight cone, so if they see you inside it, they will begin attacking.
+
+Each enemy will have a schedule and path they follow, but if they notice something suspicious, they will change behavior. If they see an uncounscious body, they will confirm if they are alive, look around the area, and then alert their friends.
+
+A test level would consist of the player needing to steal a briefcase from the office of a disgusting bolbous whale of a presidential candidate who may or may not have tried to cheat the elections.
+
+After MVP
+
+Before each level, player will be able to purchase different utilities to help on the mission. The player will be able to purchase ammo, new tools such as shotgun, grappling hook, sleeping darts, flash grenades, smokebomb, etc. This will be purchased any money they acquire during the missions. Enemies will randomly drop money, and it is possible to find additional money in objects like safes. 
 

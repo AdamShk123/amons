@@ -5,8 +5,9 @@ using Vector2 = Godot.Vector2;
 public partial class Bullet : Area2D
 {
 	[Export]
-	private float _speed = 300.0f;
+	public float Speed { get; set; }
 
+	[Export]
 	public Vector2 Dir { get; set; }
 	
 	[Export]
@@ -23,7 +24,7 @@ public partial class Bullet : Area2D
 	public override void _Process(double delta)
 	{
 		var position = Position;
-		position += (float)delta * _speed * Dir;
+		position += (float)delta * Speed * Dir;
 		Position = position;
 	}
 	

@@ -17,8 +17,6 @@ public partial class Enemy : CharacterBody2D, IDamage
 	public override void _Ready()
 	{
 		_healthComponent = GetNode<HealthComponent>("HealthComponent");
-		_healthComponent.HealthReachedZero += OnHealthReachedZero;
-		_healthComponent.Health = 100.0f;
 		
 		_hitboxComponents.Add(GetNode<HitboxComponent>("Head"));
 		_hitboxComponents.Add(GetNode<HitboxComponent>("Torso"));
@@ -28,7 +26,6 @@ public partial class Enemy : CharacterBody2D, IDamage
 		_animatedSprite2D.Play();
 
 		_deathAnimation = GetNode<AnimatedSprite2D>("DeathAnimation");
-		_deathAnimation.AnimationFinished += _on_death_animation_animation_finished;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -55,14 +52,14 @@ public partial class Enemy : CharacterBody2D, IDamage
 		}
 	}
 
-	private void OnHealthReachedZero()
+	public void OnHealthReachedZero()
 	{
 		_animatedSprite2D.Visible = false;
 		_deathAnimation.Visible = true;
 		_deathAnimation.Play(); ;
 	}
 
-	private void _on_death_animation_animation_finished()
+	private void OnDeathAnimationFinished()
 	{
 		_deathAnimation.Visible = false;
 		QueueFree();
